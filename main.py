@@ -1,9 +1,9 @@
 import random
-
-lucro_dos_objetos = [24, 13, 23, 15, 16]
-peso_dos_objetos = [12, 7, 11, 8, 9]
-tamanho_da_mochila = 26
-penalidade = 15
+#Determinar os dados que você quer aqui
+#lucro_dos_objetos = [50, 50, 64, 46, 50, 5]
+#peso_dos_objetos = [56, 59, 80, 64, 75, 17]
+#tamanho_da_mochila = 190
+#penalidade = 15
 
 
 tamanho_da_solucao = len(lucro_dos_objetos)
