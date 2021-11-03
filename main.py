@@ -1,9 +1,9 @@
 import random
 #Determinar os dados que você quer aqui
-#lucro_dos_objetos = [50, 50, 64, 46, 50, 5]
-#peso_dos_objetos = [56, 59, 80, 64, 75, 17]
-#tamanho_da_mochila = 190
-#penalidade = 15
+lucro_dos_objetos = [24, 13, 23, 15, 16]
+peso_dos_objetos = [12, 7, 11, 8, 9]
+tamanho_da_mochila = 26
+penalidade = 15
 
 
 tamanho_da_solucao = len(lucro_dos_objetos)
@@ -112,6 +112,31 @@ def relatorio_de_convergencia_da_geracao():
         media = media+i
     media_fitness_da_geracao.append(media/len(fitness))
 
+def cruzamento():
+    parentes = determinaPais()
+    pai = populacao[parentes[0]]
+    mae = populacao[parentes[1]]
+    ponto_cruzamento = random.randint(0, 5)
+    filho1 = [0] * len(mae)
+    filho2 = [0] * len(mae)
+
+    for i in range(len(mae)):
+        if i <= ponto_cruzamento:
+            filho1[i] = mae[i]
+            filho2[i] = pai[i]
+        else:
+            filho1[i] = pai[i]
+            filho2[i] = mae[i]
+    populacao[parentes[0]] = filho1
+    populacao[parentes[1]] = filho2
+
+def determinaPais():
+    mae = random.randint(0, 3)
+    pai = random.randint(0, 3)
+    while mae == pai:
+        pai = random.randint(0, 3)
+    return [mae, pai]
+
 def startAlgoritm():
     gerar_solucao_inicial()
     avaliar_populacao()
@@ -121,6 +146,7 @@ def startAlgoritm():
     while not criterio_de_parada_atingido(quantidade_atual_de_avaliacoes):
         elitismo()
         for i in range(tamanho_da_populacao):
+            cruzamento()
             mutacao(i)
             fitness_proxima_populacao[i] = funcao_objetivo(proxima_populacao[i])
             quantidade_atual_de_avaliacoes = quantidade_atual_de_avaliacoes + 1
